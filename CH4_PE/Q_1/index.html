@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Fluid Quantity Converter App</title>
+        <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+        <script src="scripts/jquery-2.2.4.js"></script>
+        <script src="scripts/jquery.mobile-1.4.5.min.js"></script>
+        <script src="scripts/Q_2.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body>
+        <div data-role="page">
+            <div data-role="navbar">
+                <ul>
+                    <li>
+                        <a href="information.html">Information</a>
+                    </li>
+                    <li>
+                        <a
+                            href="index.html"
+                            class="ui-btn-active ui-state-persist"
+                            >Interface</a
+                        >
+                    </li>
+                </ul>
+            </div>
+            <div data-role="content">
+                <label for="gallons">Enter the quantity in gallons:</label>
+                <input
+                    type="range"
+                    name="gallons"
+                    id="gallons"
+                    min="0"
+                    max="999"
+                    placeholder="0"
+                />
+                <br />
+                <button onclick="display();">Display</button>
+                <br />
+                <table id="data">
+                    <tr>
+                        <td>Quantity Entered:</td>
+                        <td id="gallonsDisplay">0</td>
+                        <td>gallons</td>
+                    </tr>
+                </table>
+            </div>
+            <div data-role="footer">
+                <small>Fluid Quantity Converter</small>
+            </div>
+        </div>
+    </body>
+</html>

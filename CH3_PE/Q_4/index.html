@@ -10,43 +10,26 @@
     </head>
     <body>
         <div data-role="page">
-            <div data-role="navbar">
-                <ul>
-                    <li>
-                        <a href="information.html">Information</a>
-                    </li>
-                    <li>
-                        <a
-                            href="index.html"
-                            class="ui-btn-active ui-state-persist"
-                            >Interface</a
-                        >
-                    </li>
-                </ul>
-            </div>
-            <div data-role="content">
-                <label for="gallons">Enter the quantity in gallons:</label>
+            <div data-role="fieldcontain">
                 <input
-                    type="range"
-                    name="gallons"
-                    id="gallons"
-                    min="0"
-                    max="999"
-                    placeholder="0"
+                    type="number"
+                    name="volume"
+                    id="volume"
                 />
-                <br />
-                <button onclick="display();">Display</button>
-                <br />
-                <table id="data">
-                    <tr>
-                        <td>Quantity Entered:</td>
-                        <td id="gallonsDisplay">0</td>
-                        <td>gallons</td>
-                    </tr>
-                </table>
-            </div>
-            <div data-role="footer">
-                <small>Fluid Quantity Converter</small>
+                <label for="volume"><strong>gallons</strong></label>    
+                <fieldset data-role="controlgroup">
+                    <legend>Convert To:</legend>
+                    <input type="radio" name="units" id="gallons" value="gallons"> 
+                    <label for="gallons">Gallons</label>
+                    <input type="radio" name="units" id="litres" value="litres"> 
+                    <label for="litres">Litres</label>
+                </fieldset>
+
+
+
+
+
+                <button onclick="display();">Convert</button>
             </div>
         </div>
     </body>
