@@ -5,49 +5,43 @@
         <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
         <script src="scripts/jquery-2.2.4.js"></script>
         <script src="scripts/jquery.mobile-1.4.5.min.js"></script>
-        <script src="scripts/Q_2.js"></script>
+        <script src="scripts/fluidconverter.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     </head>
-    <body>
+    <body onload="setup();">
         <div data-role="page">
-            <div data-role="navbar">
-                <ul>
-                    <li>
-                        <a href="information.html">Information</a>
-                    </li>
-                    <li>
-                        <a
-                            href="index.html"
-                            class="ui-btn-active ui-state-persist"
-                            >Interface</a
-                        >
-                    </li>
-                </ul>
-            </div>
-            <div data-role="content">
-                <label for="gallons">Enter the quantity in gallons:</label>
+            <div data-role="fieldcontain">
                 <input
-                    type="range"
-                    name="gallons"
-                    id="gallons"
-                    min="0"
-                    max="999"
-                    placeholder="0"
+                    type="number"
+                    name="volume"
+                    id="volume"
                 />
-                <br />
-                <button onclick="display();">Display</button>
-                <br />
-                <table id="data">
-                    <tr>
-                        <td>Quantity Entered:</td>
-                        <td id="gallonsDisplay">0</td>
-                        <td>gallons</td>
-                    </tr>
-                </table>
+                <label id="label">gallons</label>
             </div>
-            <div data-role="footer">
-                <small>Fluid Quantity Converter</small>
-            </div>
+            <fieldset data-role="controlgroup">
+                <legend>Convert to:</legend>
+                <input 
+                    type="radio" 
+                    name="units" 
+                    id="gallons" 
+                    value="gallons"
+                />
+                <label for="gallons">Gallons</label>
+                <input 
+                    type="radio" 
+                    name="units" 
+                    id="litres" 
+                    value="litres" 
+                    checked="checked"
+                />
+                <label for="litres">Litres</label>
+            </fieldset>
+            <input 
+                type="button"
+                onclick="convert()"
+                value="Convert"
+            />
+            <p id="answer"></p>
         </div>
     </body>
 </html>
