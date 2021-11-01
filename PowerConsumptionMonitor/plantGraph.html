@@ -15,7 +15,7 @@
         <script src="scripts/jquery.mobile-1.4.5.min.js"></script>
     </head>
     <body>
-        <div data-role="page" id="pageMenu">
+        <div data-role="page" id="pagePlantGraph">
             <div data-role="header">
                 <a
                     href="menu.html"
@@ -35,18 +35,20 @@
                 >
                     Info
                 </a>
-                <h1>Menu</h1>
+                <h1>Plant Graph</h1>
             </div>
-            <div data-role="content">
-                <div data-role="controlgroup">
-                    <a href="plantInfo.html" data-role="button">Plant Info</a>
-                    <a href="plantRecords.html" data-role="button"
-                        >Plant Records</a
-                    >
-                    <a href="plantGraph.html" data-role="button">Plant Graph</a>
-                    <a href="plantRecommendations.html" data-role="button"
-                        >Plant Recommendations</a
-                    >
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Power Consumption</h3>
+                    <div class="panel-body">
+                        <canvas
+                            id="graphCanvas"
+                            width="500"
+                            height="500"
+                            style="border: 1px solid #000000"
+                        >
+                        </canvas>
+                    </div>
                 </div>
             </div>
         </div>

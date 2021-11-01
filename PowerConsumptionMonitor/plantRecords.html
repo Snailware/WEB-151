@@ -15,7 +15,7 @@
         <script src="scripts/jquery.mobile-1.4.5.min.js"></script>
     </head>
     <body>
-        <div data-role="page" id="pageMenu">
+        <div data-role="page" id="pagePlantRecords">
             <div data-role="header">
                 <a
                     href="menu.html"
@@ -35,18 +35,34 @@
                 >
                     Info
                 </a>
-                <h1>Menu</h1>
+                <h1>Plant Records</h1>
             </div>
             <div data-role="content">
-                <div data-role="controlgroup">
-                    <a href="plantInfo.html" data-role="button">Plant Info</a>
-                    <a href="plantRecords.html" data-role="button"
-                        >Plant Records</a
+                <div data-role="fieldcontain" id="divPlantSection"></div>
+                <h3 align="center">History</h3>
+                <div data-role="fieldcontain">
+                    <table
+                        id="tblPlantRecords"
+                        class="ui-responsive table-stroke"
+                    ></table>
+                </div>
+                <div data-role="fieldcontain">
+                    <a
+                        href="recordEntry.html"
+                        id="btnAddRecord"
+                        data-role="button"
+                        data-icon="plus"
                     >
-                    <a href="plantGraph.html" data-role="button">Plant Graph</a>
-                    <a href="plantRecommendations.html" data-role="button"
-                        >Plant Recommendations</a
+                        Add New Entry
+                    </a>
+                    <a
+                        href="#"
+                        data-role="button"
+                        id="btnClearHistory"
+                        data-icon="delete"
                     >
+                        Clear History
+                    </a>
                 </div>
             </div>
         </div>

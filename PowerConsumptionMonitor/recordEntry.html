@@ -15,7 +15,7 @@
         <script src="scripts/jquery.mobile-1.4.5.min.js"></script>
     </head>
     <body>
-        <div data-role="page" id="pageMenu">
+        <div data-role="page" id="pageNewRecordForm">
             <div data-role="header">
                 <a
                     href="menu.html"
@@ -35,19 +35,28 @@
                 >
                     Info
                 </a>
-                <h1>Menu</h1>
+                <h1>New Record</h1>
             </div>
             <div data-role="content">
-                <div data-role="controlgroup">
-                    <a href="plantInfo.html" data-role="button">Plant Info</a>
-                    <a href="plantRecords.html" data-role="button"
-                        >Plant Records</a
-                    >
-                    <a href="plantGraph.html" data-role="button">Plant Graph</a>
-                    <a href="plantRecommendations.html" data-role="button"
-                        >Plant Recommendations</a
-                    >
-                </div>
+                <form id="frmNewRecordForm" action="">
+                    <div data-role="fieldcontain">
+                        <div data-role="fieldcontain">
+                            <label for="powerConsumption">
+                                Power Consumption:
+                            </label>
+                            <input
+                                type="number"
+                                step="0.01"
+                                name="powerConsumption"
+                                data-mini="false"
+                                placeholder="0"
+                                id="powerConsumption"
+                                value=""
+                            />
+                        </div>
+                    </div>
+                    <input type="submit" id="btnSubmitRecord" value="Add" />
+                </form>
             </div>
         </div>
     </body>
