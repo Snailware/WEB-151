@@ -10,17 +10,20 @@
         <link rel="stylesheet" href="css/bootstrap.css">
         <script src="scripts/jquery-2.2.4.js"></script>
         <script src="scripts/jquery.mobile-1.4.5.min.js"></script>
+        <script src="scripts/PowerConsumptionMonitor.js"></script>
     </head>
     <body>  
+
+        <!-- password entry page -->
         <div data-role="page" id="pageHome">
             <div data-role="header">
                 <h1>Power Consumption Monitor</h1>
             </div>
             <div data-role="content">
-                Password : <input type="password" id="passcode"></input>
+                Password : <input type="password" id="passcode">
                 <div data-role="controlgroup" id="numKeyPad">
                     <a data-role="button" id="btnEnter" type="submit">Enter</a>
-                    <a href="about.html" data-role="button">About</a>
+                    <a href="#pageAbout" data-role="button">About</a>
                 </div>
                 <div data-role="controlgroup" data-type="horizontal">
                     <a data-role="button" onclick="addValueToPassword(7)">7</a>
@@ -43,5 +46,307 @@
                 </div>
             </div>
         </div>
+
+        <!-- menu page -->
+        <div data-role="page" id="pageMenu">
+            <div data-role="header">
+                <a
+                    href="#pageMenu"
+                    data-role="button"
+                    data-icon="bars"
+                    data-iconpos="left"
+                    data-inline="true"
+                >
+                    Menu
+                </a>
+                <a
+                    href="#pageAbout"
+                    data-role="button"
+                    data-icon="info"
+                    data-iconpos="right"
+                    data-inline="true"
+                >
+                    Info
+                </a>
+                <h1>Menu</h1>
+            </div>
+            <div data-role="content">
+                <div data-role="controlgroup">
+                    <a href="#pagePlantInfo" data-role="button">Plant Info</a>
+                    <a href="#pagePlantRecords" data-role="button"
+                        >Plant Records</a
+                    >
+                    <a href="#pagePlantGraph" data-role="button">Plant Graph</a>
+                    <a href="#pagePlantRecommendations" data-role="button"
+                        >Plant Recommendations</a
+                    >
+                </div>
+            </div>
+        </div>
+
+        <!-- about page -->
+        <div data-role="page" id="pageAbout">
+            <div data-role="header">
+                <a
+                    href="#pagePlantInfo"
+                    data-role="button"
+                    data-icon="bars"
+                    data-iconpos="left"
+                    data-inline="true"
+                >
+                    Home
+                </a>
+                <h1>Info</h1>
+            </div>
+            <div data-role="content">
+                this app will monitor power consumption of power plant.
+            </div>
+        </div>
+
+        <!-- plant graph page -->
+        <div data-role="page" id="pagePlantGraph">
+            <div data-role="header">
+                <a
+                    href="#pageMenu"
+                    data-role="button"
+                    data-icon="bars"
+                    data-iconpos="left"
+                    data-inline="true"
+                >
+                    Menu
+                </a>
+                <a
+                    href="#pageAbout"
+                    data-role="button"
+                    data-icon="info"
+                    data-iconpos="right"
+                    data-inline="true"
+                >
+                    Info
+                </a>
+                <h1>Plant Graph</h1>
+            </div>
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Power Consumption</h3>
+                    <div class="panel-body">
+                        <canvas
+                            id="graphCanvas"
+                            width="500"
+                            height="500"
+                            style="border: 1px solid #000000"
+                        >
+                        </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- plant info page -->
+        <div data-role="page" id="pagePlantInfo">
+            <div data-role="header">
+                <a
+                    href="#pageMenu"
+                    data-role="button"
+                    data-icon="bars"
+                    data-iconpos="left"
+                    data-inline="true"
+                >
+                    Menu
+                </a>
+                <a
+                    href="#pageAbout"
+                    data-role="button"
+                    data-icon="info"
+                    data-iconpos="right"
+                    data-inline="true"
+                >
+                    Info
+                </a>
+                <h1>Plant Info</h1>
+            </div>
+            <div data-role="content">
+                <form id="frmPlantForm" action="">
+                    <div data-role="fieldcontain">
+                        <label for="txtPlantID">Plant ID:</label>
+                        <input
+                            type="text"
+                            placeholder="Plant ID"
+                            name="txtPlantID"
+                            data-mini="false"
+                            id="txtPlantID"
+                            value=""
+                            required
+                        />
+                    </div>
+                    <div data-role="fieldcontain">
+                        <label for="installDate">Installation Date:</label>
+                        <input
+                            type="date"
+                            placeholder="date"
+                            name="installDate"
+                            data-mini="false"
+                            id="installDate"
+                            value=""
+                            required
+                        />
+                    </div>
+                    <div data-role="fieldcontain">
+                        <label for="changePassword">Password:</label>
+                        <input
+                            type="password"
+                            placeholder="new password"
+                            name="changePassword"
+                            data-mini="false"
+                            id="changePassword"
+                            value=""
+                            required
+                        />
+                    </div>
+                    <input
+                        type="submit"
+                        id="btnPlantUpdate"
+                        data-icon="check"
+                        data-iconpos="left"
+                        value="Update"
+                        data-inline="true"
+                    />
+                </form>
+            </div>
+        </div>
+
+        <!-- plant recommendations page -->
+        <div data-role="page" id="pagePlantRecommendations">
+            <div data-role="header">
+                <a
+                    href="#pageMenu"
+                    data-role="button"
+                    data-icon="bars"
+                    data-iconpos="left"
+                    data-inline="true"
+                >
+                    Menu
+                </a>
+                <a
+                    href="#pageAbout"
+                    data-role="button"
+                    data-icon="info"
+                    data-iconpos="right"
+                    data-inline="true"
+                >
+                    Info
+                </a>
+                <h1>Plant Recommendations</h1>
+            </div>
+            <div data-role="content">
+                <canvas
+                    id="RecommendationsCanvas"
+                    width="550"
+                    height="550"
+                    style="border: 1px solid #000000"
+                >
+                </canvas>
+            </div>
+        </div>
+
+        <!-- plant records page -->
+        <div data-role="page" id="pagePlantRecords">
+            <div data-role="header">
+                <a
+                    href="#pageMenu"
+                    data-role="button"
+                    data-icon="bars"
+                    data-iconpos="left"
+                    data-inline="true"
+                >
+                    Menu
+                </a>
+                <a
+                    href="#pageAbout"
+                    data-role="button"
+                    data-icon="info"
+                    data-iconpos="right"
+                    data-inline="true"
+                >
+                    Info
+                </a>
+                <h1>Plant Records</h1>
+            </div>
+            <div data-role="content">
+                <div data-role="fieldcontain" id="divPlantSection"></div>
+                <h3 align="center">History</h3>
+                <div data-role="fieldcontain">
+                    <table
+                        id="tblPlantRecords"
+                        class="ui-responsive table-stroke"
+                    ></table>
+                </div>
+                <div data-role="fieldcontain">
+                    <a
+                        href="#pageNewRecordForm"
+                        id="btnAddRecord"
+                        data-role="button"
+                        data-icon="plus"
+                    >
+                        Add New Entry
+                    </a>
+                    <a
+                        href="#"
+                        data-role="button"
+                        id="btnClearHistory"
+                        data-icon="delete"
+                    >
+                        Clear History
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- record entry page -->
+        <div data-role="page" id="pageNewRecordForm">
+            <div data-role="header">
+                <a
+                    href="#pageMenu"
+                    data-role="button"
+                    data-icon="bars"
+                    data-iconpos="left"
+                    data-inline="true"
+                >
+                    Menu
+                </a>
+                <a
+                    href="#pageAbout"
+                    data-role="button"
+                    data-icon="info"
+                    data-iconpos="right"
+                    data-inline="true"
+                >
+                    Info
+                </a>
+                <h1>New Record</h1>
+            </div>
+            <div data-role="content">
+                <form id="frmNewRecordForm" action="">
+                    <div data-role="fieldcontain">
+                        <div data-role="fieldcontain">
+                            <label for="powerConsumption">
+                                Power Consumption:
+                            </label>
+                            <input
+                                type="number"
+                                step="0.01"
+                                name="powerConsumption"
+                                data-mini="false"
+                                placeholder="0"
+                                id="powerConsumption"
+                                value=""
+                            />
+                        </div>
+                    </div>
+                    <input type="submit" id="btnSubmitRecord" value="Add" />
+                </form>
+            </div>
+        </div>
+
     </body>
 </html>
