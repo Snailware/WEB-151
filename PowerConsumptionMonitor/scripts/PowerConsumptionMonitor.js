@@ -31,7 +31,8 @@ function getPassword()
     }
 }
 
-$( "#btnEnter" ).click(function()
+// submit entered password to be compared with stored password. 
+function submitPassword()
 {
     var password=getPassword();
     if(document.getElementById("passcode").value==password)
@@ -49,4 +50,4 @@ $( "#btnEnter" ).click(function()
     {
         alert("Incorrect password, please try again.");
     }
-});
+}

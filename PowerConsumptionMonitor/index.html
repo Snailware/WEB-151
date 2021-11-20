@@ -3,26 +3,33 @@
     <head>
         <title>Power Consumption Monitor</title>
 
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-        <meta charset="utf-8">
-
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"
+        />
+        <meta charset="utf-8" />
         <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
-        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/bootstrap.css" />
         <script src="scripts/jquery-2.2.4.js"></script>
         <script src="scripts/jquery.mobile-1.4.5.min.js"></script>
         <script src="scripts/PowerConsumptionMonitor.js"></script>
     </head>
-    <body>  
-
+    <body>
         <!-- password entry page -->
         <div data-role="page" id="pageHome">
             <div data-role="header">
                 <h1>Power Consumption Monitor</h1>
             </div>
             <div data-role="content">
-                Password : <input type="password" id="passcode">
+                Password : <input type="password" id="passcode" />
                 <div data-role="controlgroup" id="numKeyPad">
-                    <a data-role="button" id="btnEnter" type="submit">Enter</a>
+                    <a
+                        data-role="button"
+                        id="btnEnter"
+                        onclick="submitPassword()"
+                        type="submit"
+                        >Enter</a
+                    >
                     <a href="#pageAbout" data-role="button">About</a>
                 </div>
                 <div data-role="controlgroup" data-type="horizontal">
@@ -42,7 +49,12 @@
                 </div>
                 <div data-role="controlgroup" data-type="horizontal">
                     <a data-role="button" onclick="addValueToPassword(0)">0</a>
-                    <a data-role="button" onclick="addValueToPassword('bksp')" data-icon="delete">del</a>
+                    <a
+                        data-role="button"
+                        onclick="addValueToPassword('bksp')"
+                        data-icon="delete"
+                        >del</a
+                    >
                 </div>
             </div>
         </div>
@@ -347,6 +359,5 @@
                 </form>
             </div>
         </div>
-
     </body>
 </html>
