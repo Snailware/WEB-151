@@ -244,3 +244,195 @@ $("#pageNewRecordForm").on("pageshow", function()
     }
 });
 
+/* change button values. value of button is used to determine which operation
+ to perform.*/
+$("#btnAddRecord").click(function()
+{
+    $("#btnSubmitRecord").val("Add");
+    if($("btnSubmitRecord").hasClass("btn-ui-hidden")) // might need to add #
+    {
+        $("#btnSubmitRecord").button("refresh");
+    }
+});
+
+// trigger addition of new record.
+$("#frmNewRecordForm").submit(function()
+{
+    var formOperation = $("#btnSubmitRecord").val();
+
+    if (formOperation == "Add")
+    {
+        addRecord();
+        $.mobile.changePage("#pagePlantRecords");
+    }
+    else if (formOperation == "Edit")
+    {
+        editRecord($("#btnSubmitRecord").attr("indexToEdit"));
+        $.mobile.changePage("#pagePlantRecords");
+        $("#btnSubmitRecord").removeAttr("indexToEdit");
+    }
+
+    return false;
+});
+
+// add record to array in local storage.
+function addRecord()
+{
+    if (checkRecordForm()) 
+    {
+        var d = new Date();
+        var month = d.getMonth() + 1;
+        var date = d.getDate();
+        var currentDate = d.getFullYear() + '/' + 
+        (('' + month).length < 2 ? '0' : '') + month + '/' +
+        (('' + date).length < 2 ? '0' : '') + date;
+
+        var record = 
+        {
+            "powerConsumed" : $('#powerConsumption').val(),
+            "dateEntered"   : currentDate
+        };
+
+        try
+        {
+            var tbRecords = JSON.parse(localStorage.getItem("tbRecords"));
+            if (tbRecords == null)
+            {
+                tbRecords = [];
+            }
+            tbRecords.push(record);
+            localStorage.setItem("tbRecords", JSON.stringify(tbRecords));
+            alert("Saving Information.");
+            clearRecordForm();
+            listRecords();
+        }
+        catch(e)
+        {
+            if (window.navigator.vendor === "Google Inc")
+            {
+                if (e == DOMException.QUOTA_EXCEEDED_ERR)
+                {
+                    alert("Error: Local Storage limit exceeded.");
+                }
+            }
+            else if (e == QUOTA_EXCEEDED_ERR)
+            {
+                alert("Error: Saving to local storage.");
+            }
+
+            console.log(e);
+        }
+    }
+    else
+    {
+        alert("Please complete the form properly.")
+    }
+
+    return true;
+}
+
+// verify validity of data entry. 
+function checkRecordForm() 
+{
+    if (($("#powerConsumption").val() != "") && 
+        (parseFloat($("#powerConsumption")) > 0))
+    {
+        return true;
+    }
+    else 
+    {
+        return false;
+    }
+}
+
+// populate table with records.
+function listRecords() 
+{
+    try
+    {
+        var tbRecords = JSON.parse(localStorage.getItem("tbRecords"));
+    }
+    catch(e)
+    {
+        if (window.navigator.vendor === "Google Inc")
+        {
+            if (e == DOMException.QUOTA_EXCEEDED_ERR)
+            {
+                alert("Error: Local Storage limit exceeded.");
+            }
+        }
+        else if (e == QUOTA_EXCEEDED_ERR)
+        {
+            alert("Error: Saving to local storage.");
+        }
+        console.log(e);
+    }
+
+    if (tbRecords != null)
+    {
+        tbRecords.sort(compareDates); // double check this
+
+        $("#tblPlantRecords").html(
+            "<thead>"+
+            "   <tr>"+
+            "       <th>Date</th>"+
+            "       <th><abbr title='Power Consumption'>PC</abbr></th>"+
+            "       <th>Edit / Delete</th>"+
+            "   </tr>"+
+            "</thead>"+
+            "<tbody>"+
+            "</tbody>"
+        );
+
+        for(var i=0; i < tbRecords.length; i++)
+        {
+            var record = tbRecords[i];
+
+            $("#tblPlantRecords tbody").append(
+                "</tr>"+
+                "   <td>"+record.dateEntered+"</td>"+
+                "   <td>"+record.powerConsumed+"</td>"+
+                "   <td><a data-inline='true' data-mini='true' data-role='button' href='#pageNewRecordForm' onclick='callEdit("+i+")' data-icon='edit' data-iconpos='notext'></a>"+
+                "   <a data-inline='true' data-mini='true' data-role='button' href='#' onclick='callDelete("+i+")' data-icon='delete' data-iconpos='notext'></a></td>"+
+                "</tr>"
+            );
+        }
+
+        $('#tblPlantRecords [data-role="button"]').button();
+    }
+    else
+    {
+        $("#tblPlantRecords").html("");
+    }
+    
+    return true;
+}
+
+// compare 2 dates.
+function compareDates(a, b)
+{
+    var x = new Date(a.Date);
+    var y = new Date(b.Date);
+
+    if(x>y)
+    {
+        return 1;
+    }
+    else
+    {
+        return -1;
+    }
+}
+
+// change button attr as needed.
+function callEdit(index)
+{
+    $("#btnSubmitRecord").attr("indexToEdit", index);
+    $("#btnSubmitRecord").val("Edit");
+
+    if($("#btnSubmitRecord").hasClass("btn-ui-hidden"))
+    {
+        $("#btnSubmitRecord").button("refresh");
+    }
+}
+
