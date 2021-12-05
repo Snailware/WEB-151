@@ -219,16 +219,6 @@ function loadPlantInformation()
 
 }
 
-// triggers new record page.
-$("btnAddRecord").click(function()
-{
-    $("btnSubmitRecord").val("Add");
-    if($("#btnSubmitRecord").hasClass("btn-ui-hidden"))
-    {
-        $("#btnSubmitRecord").button("refresh");
-    }
-});
-
 // initiates addition of record.
 $("#pageNewRecordForm").on("pageshow", function()
 {
