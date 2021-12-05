@@ -166,7 +166,7 @@ $(document).on("pageshow", function()
     else if($('.ui-page-active').attr('id')=="pagePlantRecords")
     {
         loadPlantInformation();
-        //listRecords();
+        listRecords();
     }
     else if($('.ui-page-active').attr('id')=="pagePlantRecommendations")
     {
@@ -435,4 +435,126 @@ function callEdit(index)
         $("#btnSubmitRecord").button("refresh");
     }
 }
+
+// edit selected record.
+function editRecord(index)
+{
+    if(checkRecordForm())
+    {
+        try
+        {
+            var tbRecords=JSON.parse(localStorage.getItem("tbRecords"));
+            tbRecords[index] = 
+            {
+                "powerConsumed" : $('#powerConsumption').val(),
+                "dateEntered"   : currentDate
+            };
+            localStorage.setItem("tbRecords", JSON.stringify(tbRecords));
+            alert("saving information");
+            clearRecordForm();
+            listRecords();
+        }
+        catch(e)
+        {
+            if (window.navigator.vendor === "Google Inc")
+            {
+                if (e == DOMException.QUOTA_EXCEEDED_ERR)
+                {
+                    alert("Error: Local Storage limit exceeded.");
+                }
+            }
+            else if (e == QUOTA_EXCEEDED_ERR)
+            {
+                alert("Error: Saving to local storage.");
+            }
+
+            console.log(e);
+        }
+    }
+    else
+    {
+        alert("Please complete the form properly.")
+    }
+}
+
+// clear record form.
+function clearRecordForm()
+{
+    $('#powerConsumption').val("");
+    return true;
+}
+
+// display record in form.
+function showRecordForm(index)
+{
+    try
+    {
+        var tbRecords = JSON.parse(localStorage.getItem("tbRecords"));
+        var rec = tbRecords[index];
+        $('#powerConsumption').val(rec.powerConsumed);
+    }
+    catch(e)
+    {
+        if (window.navigator.vendor === "Google Inc")
+        {
+            if (e == DOMException.QUOTA_EXCEEDED_ERR)
+            {
+                alert("Error: Local Storage limit exceeded.");
+            }
+        }
+        else if (e == QUOTA_EXCEEDED_ERR)
+        {
+            alert("Error: Saving to local storage.");
+        }
+        console.log(e);
+    }
+}
+
+// delete selected record.
+function deleteRecord(index)
+{
+    try
+    {
+        var tbRecords = JSON.parse(localStorage.getItem("tbRecords"));
+        tbRecords.splice(index, 1);
+        if(tbRecords.length==0)
+        {
+            localStorage.removeItem("tbRecords");
+        }
+        else
+        {
+            localStorage.setItem("tbRecords", JSON.stringify(tbRecords));
+        }
+    }
+    catch(e)
+    {
+        if (window.navigator.vendor === "Google Inc")
+        {
+            if (e == DOMException.QUOTA_EXCEEDED_ERR)
+            {
+                alert("Error: Local Storage limit exceeded.");
+            }
+        }
+        else if (e == QUOTA_EXCEEDED_ERR)
+        {
+            alert("Error: Saving to local storage.");
+        }
+        console.log(e);
+    }
+}
+
+// call delete func and refresh records.
+function callDelete(index)
+{
+    deleteRecord(index);
+    listRecords();
+}
+
+//remove all record data from local storage.
+$("btnClearHistory").click(function() 
+{
+    localStorage.removeItem("tbRecords");
+    listRecords();
+    alert("All records have been deleted.");
+});
 
