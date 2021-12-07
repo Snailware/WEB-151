@@ -156,7 +156,7 @@ function showPlantForm()
     }
 }
 
-// displays information for each page as they are shown. WORKS.
+// displays information for each page as they are shown.
 $(document).on("pageshow", function()
 {
     if($('.ui-page-active').attr('id')=="pagePlantInfo")
@@ -219,8 +219,8 @@ function loadPlantInformation()
 
 }
 
-// initiates addition of record. WORKS.
-$(document).on("pageshow", "#pageNewRecordForm", function()
+// initiates addition of record.
+$("#pageNewRecordForm").on("pageshow", function()
 {
     var formOperation = $("#btnSubmitRecord").val();
 
@@ -235,21 +235,19 @@ $(document).on("pageshow", "#pageNewRecordForm", function()
 });
 
 /* change button values. value of button is used to determine which operation
- to perform. WORKS.*/ 
-function changeAddRecBtnVals()
+ to perform.*/
+$("#btnAddRecord").click(function()
 {
     $("#btnSubmitRecord").val("Add");
     if($("btnSubmitRecord").hasClass("btn-ui-hidden")) // might need to add #
     {
         $("#btnSubmitRecord").button("refresh");
     }
-}
+});
 
-// trigger addition of new record. WORKS.
-function submitNewRecord()
+// trigger addition of new record.
+$("#frmNewRecordForm").submit(function()
 {
-    console.log("frmNewRecordForm works");
-
     var formOperation = $("#btnSubmitRecord").val();
 
     if (formOperation == "Add")
@@ -265,7 +263,7 @@ function submitNewRecord()
     }
 
     return false;
-}
+});
 
 // add record to array in local storage.
 function addRecord()
@@ -333,7 +331,7 @@ function checkRecordForm()
     }
     else 
     {
-        return true;
+        return false;
     }
 }
 
@@ -381,7 +379,7 @@ function listRecords()
             var record = tbRecords[i];
 
             $("#tblPlantRecords tbody").append(
-                "<tr>"+
+                "</tr>"+
                 "   <td>"+record.dateEntered+"</td>"+
                 "   <td>"+record.powerConsumed+"</td>"+
                 "   <td><a data-inline='true' data-mini='true' data-role='button' href='#pageNewRecordForm' onclick='callEdit("+i+")' data-icon='edit' data-iconpos='notext'></a>"+
@@ -419,7 +417,6 @@ function compareDates(a, b)
 // change button attr as needed.
 function callEdit(index)
 {
-    console.log("it worked!");
     $("#btnSubmitRecord").attr("indexToEdit", index);
     $("#btnSubmitRecord").val("Edit");
 
@@ -544,39 +541,10 @@ function callDelete(index)
 }
 
 //remove all record data from local storage.
-function clearHistory()
+$("btnClearHistory").click(function() 
 {
     localStorage.removeItem("tbRecords");
     listRecords();
     alert("All records have been deleted.");
-}
+});
 
-// load advice page. 
-function advicePage()
-{
-    if (localStorage.getItem("tbRecords") === null)
-    {
-        alert("no records exist.");
-        $(location).attr("href", "#pageMenu");
-    }
-    else
-    {
-        var tbRecords=JSON.parse(localStorage.getItem("tbRecords"));
-        tbRecords.sort(compareDates);
-        var i=tbRecords.length-1;
-        var powerConsumed=tbRecords[i].powerConsumed;
-        var c=document.getElementById("RecommendationsCanvas");
-        var ctx=c.getContext("2d");
-        ctx.fillStyle="#c0c0c0";
-        ctx.fillRect(0,0,550,550);
-        ctx.font="22px Arial";
-        drawRecommendationsCanvas(ctx, powerConsumed);
-    }
-}
-
-function drawRecommendationsCanvas(ctx, powerConsumed)
-{
-    ctx.font="22px Arial";
-    ctx.fillStyle="black";
-    ctx.fillText("your current power consumption is: " + powerConsumed + ".", 25, 320)
-}
